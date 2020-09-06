@@ -1,0 +1,20 @@
+FROM store/elastic/filebeat:7.9.0
+
+COPY filebeat.yml /usr/share/filebeat/filebeat.yml
+
+USER root
+#RUN apt-get update
+#RUN apt-get install python
+
+RUN yum -y install epel-release && yum clean all
+RUN yum -y install python-pip && yum clean all
+
+#RUN mkdir /usr/share/home_mission/
+COPY logscript.sh  /usr/local/bin/logscript.sh
+RUN chmod 755 /usr/local/bin/logscript.sh
+#COPY home_task.py  /usr/share/home_mission/home_task.py
+#RUN chmod 755 /usr/share/home_mission/home_task.py
+
+#CMD python /usr/share/home_mission/home_task.py
+CMD /usr/local/bin/logscript.sh
+CMD /usr/share/filebeat/filebeat -c filebeat.yml

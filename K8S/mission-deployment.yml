@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mission-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: elk
+  template:
+    metadata:
+      labels:
+        component: elk
+    spec:
+      containers:
+        - name: elasticsearch
+          image: lishaiavraham/dockertoolbox_elasticsearch:latest
+          ports:
+            - containerPort: 9200
+        - name: logstash
+          image: lishaiavraham/dockertoolbox_logstash:latest
+          ports:
+            - containerPort: 5044
+        - name: kibana
+          image: lishaiavraham/dockertoolbox_kibana:latest
+          ports:
+            - containerPort: 5601
+        - name: filebeat
+          image: lishaiavraham/dockertoolbox_filebeat:latest
+          ports:
+            - containerPort: 5044

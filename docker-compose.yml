@@ -1,0 +1,40 @@
+version: '3'
+services:
+  elasticsearch:
+    container_name: elasticsearch
+    ports:
+      - "30000:9200"
+    build:
+      context: ./
+      dockerfile: Dockerfile-elasticsearch.yml
+    networks:
+      - net
+  kibana:
+    container_name: kibana
+    ports:
+      - "30002:5601"
+    build:
+      context: ./ 
+      dockerfile: Dockerfile-kibana.yml
+    networks:
+      - net
+  logstash:
+    container_name: logstash
+    ports:
+      - "30001:5044"
+    build: 
+      context: ./
+      dockerfile: Dockerfile-logstash.yml
+    networks:
+      - net
+  filebeat:
+    container_name: filebeat
+    ports:
+      - "30003:5044"
+    build: 
+      context: ./
+      dockerfile: Dockerfile-filebeat.yml
+    networks:
+      - net
+networks:
+  net:

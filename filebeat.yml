@@ -1,0 +1,14 @@
+filebeat:
+    inputs:
+      -
+        paths:
+          - /tmp/logfile.log
+        input_type: log
+        multiline.pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}'
+        multiline.negate: true
+        multiline.match: after
+
+
+output:
+  logstash:
+    hosts: ["localhost:5044"]

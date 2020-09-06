@@ -1,0 +1,7 @@
+FROM kibana:7.9.0
+
+RUN   sed -i "s|elasticsearch.hosts: [ "http://elasticsearch:9200" ]|elasticsearch.hosts: [ "http://localhost:9200" ] |g" /usr/share/kibana/config/kibana.yml
+
+CMD /usr/share/kibana/bin/kibana
+
+

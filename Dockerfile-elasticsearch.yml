@@ -1,0 +1,5 @@
+FROM elasticsearch:7.9.0
+
+USER elasticsearch
+
+CMD /usr/share/elasticsearch/bin/elasticsearch
